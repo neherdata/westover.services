@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>westover.services - Service Gateway</title>
+    <title>Westover Services - Professional Development Services Catalog</title>
+    <meta name="description" content="Comprehensive services catalog: AI-augmented development, home infrastructure, mobile apps, FastAPI backends, and legacy modernization. Custom solutions with transparent pricing.">
+    <link rel="icon" type="image/png" href="https://westover.dev/favicon.png">
     <style>
         * {
             margin: 0;
@@ -11,227 +13,608 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1f3a;
+            --accent: #00d4ff;
+            --accent-dim: #0099cc;
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --border: #27273f;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            min-height: 100vh;
-            padding: 2rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
 
         header {
-            margin-bottom: 3rem;
+            padding: 4rem 0 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
         }
 
         h1 {
             font-size: 3rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            color: #888;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .service-category {
             margin-bottom: 3rem;
         }
 
-        .service-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
+        .service-item {
+            background: var(--bg-secondary);
+            padding: 2rem;
             border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
         }
 
-        .service-card:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.1);
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
+        .service-item h4 {
+            font-size: 1.25rem;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
-            color: #fff;
         }
 
-        .service-card .status {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 500;
+        .service-item ul {
+            color: var(--text-secondary);
+            margin-left: 1.5rem;
             margin-bottom: 1rem;
         }
 
-        .status.active {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
+        .service-item li {
+            margin: 0.5rem 0;
         }
 
-        .status.coming-soon {
-            background: rgba(234, 179, 8, 0.2);
-            color: #eab308;
-        }
-
-        .status.offline {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-        }
-
-        .service-card p {
-            color: #999;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .service-card a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .service-card a:hover {
-            color: #764ba2;
-        }
-
-        .note {
-            background: #1a1a1a;
-            border-left: 4px solid #667eea;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-        }
-
-        .note h4 {
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-
-        .note p {
-            color: #999;
-            line-height: 1.6;
-        }
-
-        .machines {
+        .service-meta {
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 2rem;
             flex-wrap: wrap;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
         }
 
-        .machine {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            flex: 1;
-            min-width: 200px;
+        .meta-item {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
-        .machine h4 {
-            color: #667eea;
+        .meta-item strong {
+            color: var(--accent);
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .package-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .package-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .package-card.featured {
+            border-color: var(--accent);
+        }
+
+        .package-card h3 {
             margin-bottom: 0.5rem;
         }
 
-        .machine p {
-            color: #999;
-            font-size: 0.9rem;
+        .package-price {
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 1rem 0;
         }
 
-        @media (max-width: 640px) {
+        .package-card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .package-card li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .package-card li:before {
+            content: "✓ ";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-dim);
+            transform: translateY(-2px);
+        }
+
+        .contact-box {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-box h3 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-box p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-box a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
 
-            .services-grid {
+            .packages-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>westover.services</h1>
-            <p class="subtitle">Self-hosted services and experimental tools</p>
-        </header>
-
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Netdata Monitoring</h3>
-                <span class="status active">Active</span>
-                <p>Real-time system monitoring and metrics for westover.xyz infrastructure.</p>
-                <a href="https://netdata.westover.xyz" target="_blank">Open Netdata →</a>
-            </div>
-
-            <div class="service-card">
-                <h3>Web-based SSH</h3>
-                <span class="status coming-soon">Coming Soon</span>
-                <p>Browser-based SSH access to servers. Protected by Cloudflare Access.</p>
-            </div>
-
-            <div class="service-card">
-                <h3>Penpot Design</h3>
-                <span class="status active">Active</span>
-                <p>Open-source design and prototyping platform, self-hosted.</p>
-                <a href="https://design.westover.dev" target="_blank">Open Penpot →</a>
-            </div>
-
-            <div class="service-card">
-                <h3>Ghost Hunter API</h3>
-                <span class="status active">Active</span>
-                <p>AI-powered paranormal detection API with ONNX models.</p>
-                <a href="https://westover.xyz/docs" target="_blank">API Docs →</a>
-            </div>
-
-            <div class="service-card">
-                <h3>Skin Vault API</h3>
-                <span class="status active">Active</span>
-                <p>NSFW content detection API for photo privacy protection.</p>
-                <a href="https://linked.skin/docs" target="_blank">API Docs →</a>
-            </div>
-
-            <div class="service-card">
-                <h3>More Services</h3>
-                <span class="status coming-soon">Ideas Welcome</span>
-                <p>This is a living collection. More experimental services coming as ideas emerge.</p>
-            </div>
+    <header>
+        <div class="container">
+            <nav>
+                <div style="font-size: 1.25rem; font-weight: 700;">Westover Services</div>
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <a href="https://westover.dev">Home</a>
+                    <a href="https://resume.westover.dev">Resume</a>
+                    <a href="https://westover.expert">Consulting</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
         </div>
+    </header>
 
-        <div class="note">
-            <h4>🔒 Access Control</h4>
-            <p>
-                Most services are protected by Cloudflare Access with GitHub OAuth.
-                You'll need to be a member of the <strong>neherdata</strong> organization or
-                have explicit access granted to use these services.
-            </p>
-        </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Services Catalog</h1>
+                <p class="subtitle">AI-Augmented Development, Home Infrastructure, and Modern Software Solutions</p>
+            </div>
+        </section>
 
-        <div class="machines">
-            <div class="machine">
-                <h4>westover.xyz</h4>
-                <p>Primary app server<br>AMD Ryzen 7 PRO • 28GB RAM<br>Running APIs, monitoring, Claude</p>
+        <section class="section">
+            <div class="container">
+                <div class="service-category">
+                    <h2>1. AI-Augmented Development Services</h2>
+
+                    <div class="service-item">
+                        <h4>Claude Automation Implementation</h4>
+                        <ul>
+                            <li>Assessment of current development workflows</li>
+                            <li>Claude automation strategy and roadmap</li>
+                            <li>Virtual dev team setup and orchestration</li>
+                            <li>AI workflow integration (code gen, testing, deployment)</li>
+                            <li>Team training on AI-driven methodologies</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Working AI-augmented dev environment</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 2-4 weeks</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Project-based or retainer</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>Force Multiplier Workshop</h4>
+                        <ul>
+                            <li>2-day intensive workshop</li>
+                            <li>Hands-on Claude automation training</li>
+                            <li>Real-world project application</li>
+                            <li>Best practices and patterns</li>
+                            <li>Post-workshop support</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Workshop materials, sample workflows</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 2 days + 2 weeks support</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Fixed fee per team</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <h2>2. Home Infrastructure Services</h2>
+
+                    <div class="service-item">
+                        <h4>Privacy-First Infrastructure Design</h4>
+                        <ul>
+                            <li>Architecture review and design</li>
+                            <li>Home hosting vs cloud cost analysis</li>
+                            <li>Cloudflare, Tailscale, and Ansible setup</li>
+                            <li>Security and reliability planning</li>
+                            <li>Disaster recovery and backup strategies</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Architecture docs, deployment playbooks</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 2-6 weeks</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Project-based</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>Cloud Exit Strategy</h4>
+                        <ul>
+                            <li>Current cloud infrastructure audit</li>
+                            <li>Migration planning and risk assessment</li>
+                            <li>Hybrid architecture design</li>
+                            <li>Phased migration execution</li>
+                            <li>Cost savings analysis</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Migration plan, infrastructure as code</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 1-3 months</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Milestone-based</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>Home Hosting Setup</h4>
+                        <ul>
+                            <li>Hardware recommendations</li>
+                            <li>Network architecture (Tailscale mesh VPN)</li>
+                            <li>Cloudflare edge integration</li>
+                            <li>Ansible automation setup</li>
+                            <li>Monitoring and alerting</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Production-ready home infrastructure</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 2-4 weeks</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Fixed fee + ongoing support option</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <h2>3. Mobile Development Services</h2>
+
+                    <div class="service-item">
+                        <h4>React Native App Development</h4>
+                        <ul>
+                            <li>Full-cycle iOS/Android app development</li>
+                            <li>Expo for rapid iteration</li>
+                            <li>AR/VR experiences with ARKit</li>
+                            <li>On-device ML inference</li>
+                            <li>Backend API integration</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Production-ready mobile app</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 6-12 weeks typical</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Project-based with milestones</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>Subscription Monetization Setup</h4>
+                        <ul>
+                            <li>StoreKit 2 / Google Play Billing integration</li>
+                            <li>Server-side receipt validation</li>
+                            <li>Subscription management backend</li>
+                            <li>Analytics and reporting</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Working subscription system</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 1-2 weeks</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Fixed fee</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>ONNX Mobile Inference</h4>
+                        <ul>
+                            <li>ML model selection and optimization</li>
+                            <li>ONNX Runtime integration</li>
+                            <li>On-device inference optimization</li>
+                            <li>Model testing and validation</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Working mobile ML inference</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 2-4 weeks</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Project-based</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <h2>4. Backend & API Services</h2>
+
+                    <div class="service-item">
+                        <h4>FastAPI Development</h4>
+                        <ul>
+                            <li>High-performance Python backends</li>
+                            <li>Async/await optimization</li>
+                            <li>Pydantic data validation</li>
+                            <li>OpenAPI documentation</li>
+                            <li>Docker containerization</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Production API service</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 4-8 weeks typical</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Project-based</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>ONNX Inference Services</h4>
+                        <ul>
+                            <li>ML model serving infrastructure</li>
+                            <li>FastAPI + ONNX Runtime</li>
+                            <li>Horizontal scaling strategies</li>
+                            <li>Cost optimization</li>
+                            <li>Monitoring and observability</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Production inference service</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 2-4 weeks</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Fixed fee</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>Distributed Systems Architecture</h4>
+                        <ul>
+                            <li>System design and architecture review</li>
+                            <li>Scalability and reliability planning</li>
+                            <li>Technology stack recommendations</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Architecture docs, POC implementation</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 2-6 weeks</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Project-based</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <h2>5. Legacy Modernization Services</h2>
+
+                    <div class="service-item">
+                        <h4>Python 2 → 3 Migration</h4>
+                        <ul>
+                            <li>Dependency analysis and mapping</li>
+                            <li>Migration strategy and planning</li>
+                            <li>Automated migration tooling</li>
+                            <li>Testing and validation</li>
+                            <li>Production rollout support</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Fully migrated Python 3 codebase</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 1-6 months depending on scale</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Assessment + milestone-based</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>Infrastructure Modernization</h4>
+                        <ul>
+                            <li>Current stack assessment</li>
+                            <li>Modern tooling recommendations</li>
+                            <li>Container and orchestration migration</li>
+                            <li>CI/CD pipeline improvements</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Modernized infrastructure</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 2-6 months</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Milestone-based</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <h2>6. Training & Education</h2>
+
+                    <div class="service-item">
+                        <h4>Developer Workshops</h4>
+                        <ul>
+                            <li>Custom topics based on needs</li>
+                            <li>Hands-on technical training</li>
+                            <li>Available topics: AI-augmented development, home hosting, FastAPI, React Native, ONNX, distributed systems</li>
+                            <li>Post-workshop support</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Workshop materials, recordings</div>
+                            <div class="meta-item"><strong>Timeline:</strong> 1-2 days per workshop</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Per-team fixed fee</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h4>Technical Advisory Retainer</h4>
+                        <ul>
+                            <li>Ongoing technical guidance</li>
+                            <li>Architecture reviews</li>
+                            <li>Code reviews</li>
+                            <li>Office hours for team questions</li>
+                            <li>Strategic planning support</li>
+                        </ul>
+                        <div class="service-meta">
+                            <div class="meta-item"><strong>Deliverables:</strong> Regular meetings, written recommendations</div>
+                            <div class="meta-item"><strong>Timeline:</strong> Ongoing monthly retainer</div>
+                            <div class="meta-item"><strong>Pricing:</strong> Monthly fee based on hours</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="machine">
-                <h4>westover.dev</h4>
-                <p>Coming soon<br>Additional capacity<br>Future services</p>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>Service Packages</h2>
+                <div class="packages-grid">
+                    <div class="package-card">
+                        <h3>Starter Package</h3>
+                        <p style="color: var(--text-secondary);">AI-Augmented Dev Kickstart</p>
+                        <div class="package-price">Contact for Quote</div>
+                        <ul>
+                            <li>1-week assessment</li>
+                            <li>Claude automation setup</li>
+                            <li>Basic workflow integration</li>
+                            <li>2 weeks post-implementation support</li>
+                        </ul>
+                        <a href="#contact" class="cta-button">Get Started</a>
+                    </div>
+
+                    <div class="package-card featured">
+                        <h3>Growth Package</h3>
+                        <p style="color: var(--text-secondary);">Full-Stack Acceleration</p>
+                        <div class="package-price">Contact for Quote</div>
+                        <ul>
+                            <li>AI-augmented development setup</li>
+                            <li>Mobile app development (MVP)</li>
+                            <li>FastAPI backend service</li>
+                            <li>Home hosting infrastructure</li>
+                            <li>3 months support</li>
+                        </ul>
+                        <a href="#contact" class="cta-button">Get Started</a>
+                    </div>
+
+                    <div class="package-card">
+                        <h3>Enterprise Package</h3>
+                        <p style="color: var(--text-secondary);">Complete Transformation</p>
+                        <div class="package-price">Contact for Quote</div>
+                        <ul>
+                            <li>Comprehensive AI-augmented development</li>
+                            <li>Legacy system modernization</li>
+                            <li>Custom mobile and backend development</li>
+                            <li>Home infrastructure architecture</li>
+                            <li>Training and workshops</li>
+                            <li>6 months support</li>
+                        </ul>
+                        <a href="#contact" class="cta-button">Get Started</a>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem;">
+                    <h3>Add-On Services</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        On-call support packages • Extended training sessions • Infrastructure monitoring •
+                        Security audits • Performance optimization • Custom integrations
+                    </p>
+                </div>
             </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contact for Pricing</h2>
+                <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem; text-align: center;">
+                    Many services are custom-scoped based on your needs. Contact us for a free consultation and custom quote.
+                </p>
+                <div class="contact-box">
+                    <h3>Get in Touch</h3>
+                    <p><strong>Email:</strong> <a href="mailto:james@westover.dev">james@westover.dev</a></p>
+                    <p><strong>Phone:</strong> <a href="tel:+15102078194">+1-510-207-8194</a></p>
+                    <p style="margin-top: 1.5rem;">
+                        <a href="https://westover.expert" class="cta-button">Schedule Consultation</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Westover Consulting. Privacy-first, home-hosted infrastructure.</p>
         </div>
-    </div>
+    </footer>
 </body>
 </html>
